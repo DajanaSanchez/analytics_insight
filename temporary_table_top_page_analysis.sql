@@ -1,14 +1,11 @@
-CREATE TEMPORARY TABLE first_pageview
-SELECT
-website_session_id,
-       MIN(website_pageview_id) AS min_pv_id
-FROM website_pageviews
-WHERE website_pageview_id < 1000
-GROUP BY website_session_id;
+##  pull the most-viewed website pages ranked by session volume. through 2012-06-09
 
-SELECT website_pageviews.pageview_url AS landing_page, -- entry page
-COUNT(DISTINCT first_pageview.website_session_id) AS sessions_hitting_this_lander
-FROM first_pageview
-LEFT JOIN website_pageviews
-ON first_pageview.min_pv_id = website_pageviews.website_pageview_id
-GROUP BY website_pageviews.pageview_url;
+CREATE TEMPORARY TABLE most_viewed_pgs
+SELECT website_pageview_id, pageview_url,website_session_id
+       FROM website_pageviews
+WHERE created_at < '2012-06-09';
+
+SELECT pageview_url, COUNT(DISTINCT(website_session_id)) AS session_volume
+FROM most_viewed_pgs
+GROUP BY pageview_url
+ORDER BY session_volume DESC;
