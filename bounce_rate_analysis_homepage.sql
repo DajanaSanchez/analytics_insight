@@ -46,7 +46,7 @@ SELECT landing_page_seshhhh.website_session_id, landing_page_seshhhh.landing_pag
 FROM landing_page_seshhhh
 LEFT JOIN website_pageviews
 ON website_pageviews.website_session_id = landing_page_seshhhh.website_session_id
-GROUP BY landing_page_seshhhh.website_session_id, landing_page_seshhhh.landing_page, landing_page_seshhhh.landing_page
+GROUP BY landing_page_seshhhh.website_session_id, landing_page_seshhhh.landing_page
 HAVING COUNT(website_pageviews.website_pageview_id) = 1;
 #return a table with bounced sessions
 SELECT COUNT(DISTINCT(landing_page_seshhhh.website_session_id)) AS sessions, COUNT(DISTINCT(bounced_sessions.website_session_id)) AS bounced_session,
