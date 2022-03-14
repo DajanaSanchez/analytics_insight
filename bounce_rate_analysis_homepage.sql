@@ -53,6 +53,4 @@ SELECT COUNT(DISTINCT(landing_page_seshhhh.website_session_id)) AS sessions, COU
        COUNT(DISTINCT(bounced_sessions.website_session_id)) / COUNT(DISTINCT(landing_page_seshhhh.website_session_id)) AS bounced_rate
 FROM landing_page_seshhhh
 LEFT JOIN bounced_sessions
-ON landing_page_seshhhh.website_session_id = bounced_sessions.website_session_id
-ORDER BY landing_page_seshhhh.website_session_id;
-
+ON landing_page_seshhhh.website_session_id = bounced_sessions.website_session_id;
