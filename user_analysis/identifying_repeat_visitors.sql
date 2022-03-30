@@ -12,7 +12,11 @@ SELECT COUNT(DISTINCT website_session_id) AS total_sessions,
 FROM website_sessions
 WHERE created_at BETWEEN '2014-01-01' AND '2014-11-01';
 
+
+
+
 CREATE TEMPORARY TABLE sessions_with_repeatss
+
 SELECT new_sessions.user_id, new_sessions.website_session_id AS new_session_id,
        website_sessions.website_session_id AS repeat_session
 FROM(
@@ -25,6 +29,9 @@ ON website_sessions.user_id = new_sessions.user_id
 AND website_sessions.is_repeat_session = 1
 AND website_sessions.website_session_id > new_sessions.website_session_id
 AND website_sessions.created_at BETWEEN '2014-01-01' AND '2014-11-01';
+
+
+
 
 SELECT repeat_sessions, COUNT(DISTINCT user_id) AS users
 FROM(
